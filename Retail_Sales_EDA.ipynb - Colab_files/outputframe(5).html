@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<!-- saved from url=(0134)https://7qp7re4huhe-496ff2e9c6d22116-0-colab.googleusercontent.com/outputframe.html?vrz=colab-external_20261118-060100_RC00_1024520521 -->
+<html theme="light" editor="Default Light" style="overflow-y: auto;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+  // Avoid arrow function syntax to stay ES5 compatible for the sake of googlebot.
+  window.addEventListener("message", function (message) {
+    if (message.source != window.parent) {
+      return;
+    }
+    if (message.data.sandboxed_iframe_evaluation) {
+      // Message is available in scope so evaluated script can get params from
+      // it.
+      window.currentMessage = message;
+      eval.call(null, message.data.sandboxed_iframe_evaluation);
+      delete window.currentMessage;
+    }
+  });
+</script>
+<style>html{--colab-primary-color:#0b57d0;--colab-primary-text-color:#1f1f1f;--colab-primary-text-color-rgb:31,31,31;--colab-secondary-text-color:#444746;--colab-primary-surface-color:#fff;--colab-secondary-surface-color:#f2f2f2;--colab-border-color:#c4c7c5;--colab-bold-border-color:#747775;--ansi-black:#000;--ansi-red:#8b0000;--ansi-green:#006400;--ansi-yellow:#cdcd00;--ansi-blue:#00e;--ansi-magenta:#cd00cd;--ansi-cyan:#4682b4;--ansi-gray:#e5e5e5;--ansi-bright-black:#7f7f7f;--ansi-bright-red:red;--ansi-bright-green:#00d000;--ansi-bright-yellow:#ff0;--ansi-bright-blue:#5c5cff;--ansi-bright-magenta:#f0f;--ansi-bright-cyan:#0ff;--ansi-bright-gray:#fff;--colab-anchor-color:var(--colab-primary-color);--colab-highlighted-surface-color:rgba(var(--colab-primary-text-color-rgb),0.08);--colab-icon-color:var(--colab-secondary-text-color);--colab-scrollbar-color:rgba(var(--colab-primary-text-color-rgb),0.24);--colab-scrollbar-hover-color:rgba(var(--colab-primary-text-color-rgb),0.48);--colab-scrollbar-active-color:rgba(var(--colab-primary-text-color-rgb),0.48);--colab-code-font-family:monospace;--colab-chrome-font-family:"Google Sans Text","Google Sans","Noto",sans-serif;--colab-chrome-font-size:14px}html[theme=dark]{--colab-primary-color:#a8c7fa;--colab-primary-text-color:#e3e3e3;--colab-primary-text-color-rgb:227,227,227;--colab-secondary-text-color:#c4c7c5;--colab-primary-surface-color:#282a2c;--colab-secondary-surface-color:#474747;--colab-border-color:#444746;--colab-bold-border-color:#8e918f;--ansi-black:#3f3f3f;--ansi-red:#ff7a88;--ansi-green:#57bb8a;--ansi-yellow:#ff6;--ansi-blue:#82b1ff;--ansi-magenta:#cd00cd;--ansi-cyan:#99bbd7;--ansi-gray:#e5e5e5;--ansi-bright-green:#0f0}html[theme=dark].embedded{--colab-secondary-surface-color:#202124;--colab-highlighted-surface-color:#202124;--colab-border-color:#3c4043}html[editor=Synthwave84]{--colab-anchor-color:#f97e72;--colab-primary-surface-color:#262335;--colab-secondary-surface-color:#49549539;--colab-highlighted-surface-color:#37294d99;--colab-border-color:#7059ab66;--ansi-red:#fe4450;--ansi-green:#72f1b8;--ansi-yellow:#f97e72;--ansi-blue:#03edf9;--ansi-magenta:#ff7edb;--ansi-cyan:#03edf9;--ansi-bright-red:#fe4450;--ansi-bright-green:#72f1b8;--ansi-bright-yellow:#fede5d;--ansi-bright-blue:#03edf9;--ansi-bright-magenta:#ff7edb;--ansi-bright-cyan:#03edf9}html{overflow-y:hidden}body{background:var(--colab-primary-surface-color);color:var(--colab-primary-text-color);font-family:var(--colab-chrome-font-family);font-size:var(--colab-chrome-font-size);line-height:1.24;font-weight:400;padding:7px 0 10px 5px;margin:0}h1,h2,h3,h4,h5,h6{color:var(--colab-primary-text-color);font-family:var(--colab-chrome-font-family);font-weight:700;margin-bottom:4px}p,ul{margin-bottom:6px;margin-top:6px}pre{margin-bottom:0;margin-top:0}a{color:var(--colab-anchor-color)}div.output_text,div.output_text pre,div.stream{display:inline}.execute_result>pre{display:block}.output_latex,.output_markdown{max-width:1016px}.output_markdown table,table.dataframe{border-collapse:collapse;border-spacing:0;border:none;table-layout:fixed}.output_markdown table thead,table.dataframe thead{border-bottom:1px solid var(--colab-border-color);font-family:var(--colab-code-font-family);text-align:right}.output_markdown table td,.output_markdown table th,.output_markdown table tr,table.dataframe td,table.dataframe th,table.dataframe tr{border:none;padding:.5em;white-space:normal}.output_markdown table th,table.dataframe th{font-weight:700}.output_markdown table th.col_heading,table.dataframe th.col_heading{text-align:right}.output_markdown table tbody tr:nth-child(odd),table.dataframe tbody tr:nth-child(odd){background:var(--colab-secondary-surface-color)}.output_markdown table tbody tr:hover,.output_markdown table tbody tr:nth-child(odd):hover,table.dataframe tbody tr:hover,table.dataframe tbody tr:nth-child(odd):hover{background-color:var(--colab-highlighted-surface-color)}.output_markdown table td,table.dataframe td{text-align:right}table.dataTable input.text_filter{width:95%}.output_markdown table th,table.dataTable th{text-align:left}.output_image>img{background-color:#fff;max-width:100%;vertical-align:bottom}.output_image>img.unconstrained{max-width:unset}.ansibold{font-weight:700}.ansiblack{color:#000}.ansired{color:darkred}.ansigreen{color:#006400}.ansiyellow{color:brown}.ansiblue{color:#00008b}.ansipurple{color:#9400d3}.ansicyan{color:#4682b4}.ansigray{color:gray}.ansibgblack{background-color:#000}.ansibgred{background-color:red}.ansibggreen{background-color:green}.ansibgyellow{background-color:#ff0}.ansibgblue{background-color:blue}.ansibgpurple{background-color:#f0f}.ansibgcyan{background-color:cyan}.ansibggray{background-color:gray}.output-error span{font-weight:400!important}.output-error pre{white-space:pre-wrap}.display_data .output_text pre,.execute_result .output_text pre{white-space:pre-wrap}input.raw_input{font-family:var(--colab-code-font-family);width:90%}input{background:var(--colab-primary-surface-color);border:1px solid var(--colab-bold-border-color);color:var(--colab-primary-text-color)}#output-area{display:flow-root}#output-area button.colab{background-color:var(--colab-secondary-surface-color);border:0;box-shadow:0 1px 3px 1px rgba(0,0,0,.15),0 1px 2px 0 rgba(0,0,0,.3);color:var(--colab-primary-text-color);font-family:var(--colab-chrome-font-family);font-size:11px;margin:0 4px 10px;padding:6px;text-transform:uppercase;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#output-area button.colab:hover{background-color:var(--colab-highlighted-surface-color);cursor:pointer}#output-area .output-error button.error-details{background-color:#42a5f5;color:#fff}#output-area .output-error button.error-details:hover{background-color:#2196f3}#output-area .stdin-widget{-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;display:inline;font-family:var(--colab-code-font-family);margin-right:10px;margin-top:10px;min-width:250px;padding:1px}#output-area .stdin-widget-hidden{visibility:hidden}.error .collapsed .extraneous{display:none}.error .error-expander{-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex}.error .error-expander hr{border:0;border-top:1px solid var(--colab-bold-border-color);-webkit-box-flex:1;-webkit-flex-grow:1;-moz-box-flex:1;-ms-flex-positive:1;flex-grow:1;height:1px;margin:0 10px;padding:0}.error .error-expander hr:first-child{max-width:240px}.error .error-expander svg{fill:var(--colab-icon-color);height:24px;stroke:var(--colab-icon-color);width:24px}.lm-Widget.lm-mod-hidden{display:none!important}audio:focus{outline:none}::-webkit-scrollbar{height:12px;width:12px}::-webkit-scrollbar-button{height:0;width:0}::-webkit-scrollbar-corner{background:transparent}::-webkit-scrollbar-thumb{background-clip:content-box;background-color:var(--colab-scrollbar-color);border:2px solid transparent;border-radius:8px;min-height:28px;min-width:28px}::-webkit-scrollbar-thumb:hover{background-color:var(--colab-scrollbar-hover-color)}::-webkit-scrollbar-thumb:active{background-color:var(--colab-scrollbar-active-color)}@supports not (selector(::-webkit-scrollbar)){*{scrollbar-color:var(--colab-scrollbar-color) transparent}}.string-repr{display:inline}.string-repr .quote{opacity:75%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.string-repr pre{display:inline;white-space:pre-wrap;word-break:break-all}.string-repr button{color:var(--colab-primary-text-color);cursor:pointer;border:1px solid #767676;border-radius:2px;outline:none}.string-repr button.copy{background:transparent;border:none;margin-left:4px;opacity:0;padding:0;stroke:var(--colab-primary-text-color);-webkit-transition:opacity .2s;transition:opacity .2s}.string-repr button.copy svg{width:14px}.string-repr.hover button.copy,.string-repr:hover button.copy{opacity:1}.string-repr button.more{background-color:transparent;border-color:transparent;display:none;padding:0;-webkit-transition:background-color .2s,border-color .2s;transition:background-color .2s,border-color .2s}.string-repr.large button.more{display:inline}.string-repr.large.truncated button .collapse{display:none}.string-repr.large button .expand{display:none}.string-repr.large.truncated button .expand{display:inline}.string-repr.hover button.more,.string-repr:hover button.more{border-color:#767676}
+/*# sourceMappingURL=outputframe.css.map */
+//@ sourceURL=https://ssl.gstatic.com/colaboratory-static/common/0ea41fd9652063808f30f21b82428eb7/outputframe.css</style><!--<base href="https://localhost:8080/">--><base href="."></head><body><div id="output-area"><span id="output-header"> </span><div id="output-body"><div class="stream output-id-1"><div class="output_subarea output_text"><pre>\nContext sample for Sales outliers:
+</pre></div></div><div class="display_data output-id-2"><div class="output_subarea output_html rendered_html">
+  <div id="df-d5c08b28-0e99-4bc7-af97-bb741b1b7a27" class="colab-df-container">
+    <div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Transaction_ID</th>
+      <th>Customer_ID</th>
+      <th>Product_Category</th>
+      <th>Region</th>
+      <th>Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>TXN200007</td>
+      <td>CUST10108</td>
+      <td>Electronics</td>
+      <td>East</td>
+      <td>39134.78</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>TXN200019</td>
+      <td>CUST10552</td>
+      <td>Electronics</td>
+      <td>West</td>
+      <td>40773.26</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>TXN200020</td>
+      <td>CUST10307</td>
+      <td>Grocery</td>
+      <td>South</td>
+      <td>36221.69</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>TXN200054</td>
+      <td>CUST10189</td>
+      <td>Electronics</td>
+      <td>East</td>
+      <td>43010.01</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>TXN200062</td>
+      <td>CUST10907</td>
+      <td>Electronics</td>
+      <td>East</td>
+      <td>47852.64</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>TXN200063</td>
+      <td>CUST10667</td>
+      <td>Electronics</td>
+      <td>West</td>
+      <td>37830.57</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>TXN200100</td>
+      <td>CUST10880</td>
+      <td>Electronics</td>
+      <td>East</td>
+      <td>64121.53</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>TXN200109</td>
+      <td>CUST10485</td>
+      <td>Electronics</td>
+      <td>North</td>
+      <td>41856.57</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>TXN200126</td>
+      <td>CUST10587</td>
+      <td>Electronics</td>
+      <td>West</td>
+      <td>39583.57</td>
+    </tr>
+    <tr>
+      <th>203</th>
+      <td>TXN200203</td>
+      <td>CUST10475</td>
+      <td>Office Supplies</td>
+      <td>South</td>
+      <td>38553.25</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-d5c08b28-0e99-4bc7-af97-bb741b1b7a27')" title="Convert this dataframe to an interactive table." style="display: block;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script type="">
+      const buttonEl =
+        document.querySelector('#df-d5c08b28-0e99-4bc7-af97-bb741b1b7a27 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-d5c08b28-0e99-4bc7-af97-bb741b1b7a27');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div><div class="stream output-id-3"><div class="output_subarea output_text"><pre>\nContext sample for Profit outliers:
+</pre></div></div><div class="display_data output-id-4"><div class="output_subarea output_html rendered_html">
+  <div id="df-9fdb7f4f-68b3-4a0a-8fd2-d35e5e922094" class="colab-df-container">
+    <div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Transaction_ID</th>
+      <th>Customer_ID</th>
+      <th>Product_Category</th>
+      <th>Region</th>
+      <th>Profit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>TXN200007</td>
+      <td>CUST10108</td>
+      <td>Electronics</td>
+      <td>East</td>
+      <td>11111.39</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>TXN200020</td>
+      <td>CUST10307</td>
+      <td>Grocery</td>
+      <td>South</td>
+      <td>15811.74</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>TXN200062</td>
+      <td>CUST10907</td>
+      <td>Electronics</td>
+      <td>East</td>
+      <td>18532.50</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>TXN200063</td>
+      <td>CUST10667</td>
+      <td>Electronics</td>
+      <td>West</td>
+      <td>15416.76</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>TXN200095</td>
+      <td>CUST10687</td>
+      <td>Furniture</td>
+      <td>West</td>
+      <td>12200.54</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>TXN200100</td>
+      <td>CUST10880</td>
+      <td>Electronics</td>
+      <td>East</td>
+      <td>18909.06</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>TXN200109</td>
+      <td>CUST10485</td>
+      <td>Electronics</td>
+      <td>North</td>
+      <td>16238.51</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>TXN200110</td>
+      <td>CUST10073</td>
+      <td>Grocery</td>
+      <td>West</td>
+      <td>10585.59</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>TXN200126</td>
+      <td>CUST10587</td>
+      <td>Electronics</td>
+      <td>West</td>
+      <td>14912.65</td>
+    </tr>
+    <tr>
+      <th>187</th>
+      <td>TXN200187</td>
+      <td>CUST10270</td>
+      <td>Office Supplies</td>
+      <td>West</td>
+      <td>10336.32</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9fdb7f4f-68b3-4a0a-8fd2-d35e5e922094')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script type="">
+      const buttonEl =
+        document.querySelector('#df-9fdb7f4f-68b3-4a0a-8fd2-d35e5e922094 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-9fdb7f4f-68b3-4a0a-8fd2-d35e5e922094');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div><div class="stream output-id-5"><div class="output_subarea output_text"><pre>\nContext sample for Age outliers:
+</pre></div></div><div class="display_data output-id-6"><div class="output_subarea output_html rendered_html">
+  <div id="df-a6f419f8-6a71-4502-bf8f-3c5fb35788d0" class="colab-df-container">
+    <div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Transaction_ID</th>
+      <th>Customer_ID</th>
+      <th>Product_Category</th>
+      <th>Region</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>30</th>
+      <td>TXN200030</td>
+      <td>CUST10713</td>
+      <td>Electronics</td>
+      <td>West</td>
+      <td>72.0</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>TXN200033</td>
+      <td>CUST10008</td>
+      <td>Clothing</td>
+      <td>West</td>
+      <td>71.0</td>
+    </tr>
+    <tr>
+      <th>258</th>
+      <td>TXN200258</td>
+      <td>CUST10216</td>
+      <td>Office Supplies</td>
+      <td>West</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>450</th>
+      <td>TXN200450</td>
+      <td>CUST10657</td>
+      <td>Grocery</td>
+      <td>North</td>
+      <td>72.0</td>
+    </tr>
+    <tr>
+      <th>558</th>
+      <td>TXN200558</td>
+      <td>CUST10706</td>
+      <td>Clothing</td>
+      <td>West</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>633</th>
+      <td>TXN200633</td>
+      <td>CUST10780</td>
+      <td>Grocery</td>
+      <td>South</td>
+      <td>75.0</td>
+    </tr>
+    <tr>
+      <th>703</th>
+      <td>TXN200703</td>
+      <td>CUST10356</td>
+      <td>Grocery</td>
+      <td>West</td>
+      <td>68.0</td>
+    </tr>
+    <tr>
+      <th>715</th>
+      <td>TXN200715</td>
+      <td>CUST10271</td>
+      <td>Grocery</td>
+      <td>West</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>758</th>
+      <td>TXN200758</td>
+      <td>CUST10293</td>
+      <td>Electronics</td>
+      <td>South</td>
+      <td>75.0</td>
+    </tr>
+    <tr>
+      <th>759</th>
+      <td>TXN200759</td>
+      <td>CUST10270</td>
+      <td>Office Supplies</td>
+      <td>North</td>
+      <td>68.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a6f419f8-6a71-4502-bf8f-3c5fb35788d0')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script type="">
+      const buttonEl =
+        document.querySelector('#df-a6f419f8-6a71-4502-bf8f-3c5fb35788d0 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-a6f419f8-6a71-4502-bf8f-3c5fb35788d0');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div><div class="stream output-id-7"><div class="output_subarea output_text"><pre>\nContext sample for Income outliers:
+</pre></div></div><div class="display_data output-id-8"><div class="output_subarea output_html rendered_html">
+  <div id="df-b647f71d-f20f-48e3-8925-5a2330d0aa7f" class="colab-df-container">
+    <div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Transaction_ID</th>
+      <th>Customer_ID</th>
+      <th>Product_Category</th>
+      <th>Region</th>
+      <th>Income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>27</th>
+      <td>TXN200027</td>
+      <td>CUST10518</td>
+      <td>Furniture</td>
+      <td>North</td>
+      <td>191677.01</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>TXN200033</td>
+      <td>CUST10008</td>
+      <td>Clothing</td>
+      <td>West</td>
+      <td>151781.74</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>TXN200055</td>
+      <td>CUST10160</td>
+      <td>Office Supplies</td>
+      <td>South</td>
+      <td>150436.38</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>TXN200058</td>
+      <td>CUST10153</td>
+      <td>Electronics</td>
+      <td>East</td>
+      <td>200321.10</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>TXN200067</td>
+      <td>CUST10144</td>
+      <td>Office Supplies</td>
+      <td>East</td>
+      <td>147008.64</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>TXN200079</td>
+      <td>CUST10161</td>
+      <td>Furniture</td>
+      <td>North</td>
+      <td>132622.24</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>TXN200102</td>
+      <td>CUST10452</td>
+      <td>Grocery</td>
+      <td>North</td>
+      <td>136863.51</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>TXN200112</td>
+      <td>CUST10433</td>
+      <td>Office Supplies</td>
+      <td>North</td>
+      <td>135151.61</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>TXN200141</td>
+      <td>CUST11117</td>
+      <td>Clothing</td>
+      <td>East</td>
+      <td>185449.81</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>TXN200146</td>
+      <td>CUST10317</td>
+      <td>Grocery</td>
+      <td>West</td>
+      <td>168359.08</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-b647f71d-f20f-48e3-8925-5a2330d0aa7f')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script type="">
+      const buttonEl =
+        document.querySelector('#df-b647f71d-f20f-48e3-8925-5a2330d0aa7f button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-b647f71d-f20f-48e3-8925-5a2330d0aa7f');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div><div class="display_data output-id-9"><div class="output_subarea output_html rendered_html">
+  <div id="df-a66e8392-65a3-4256-b33c-87459f16bdfc" class="colab-df-container">
+    <div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>lower_fence</th>
+      <th>upper_fence</th>
+      <th>flagged_count</th>
+      <th>flagged_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sales</td>
+      <td>-14760.59</td>
+      <td>34303.55</td>
+      <td>307</td>
+      <td>4.39</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Profit</td>
+      <td>-4406.33</td>
+      <td>10073.49</td>
+      <td>386</td>
+      <td>5.51</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Age</td>
+      <td>7.50</td>
+      <td>67.50</td>
+      <td>53</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Income</td>
+      <td>-21066.38</td>
+      <td>123598.46</td>
+      <td>327</td>
+      <td>4.67</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a66e8392-65a3-4256-b33c-87459f16bdfc')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script type="">
+      const buttonEl =
+        document.querySelector('#df-a66e8392-65a3-4256-b33c-87459f16bdfc button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-a66e8392-65a3-4256-b33c-87459f16bdfc');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div></div><span id="output-footer"></span></div></body></html>
